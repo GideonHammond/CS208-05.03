@@ -1,56 +1,27 @@
-// This is a simple JavaScript file that adds interactivity to the HTML page
-// It defines a function to show an alert when a link is clicked
-function sayHello() {
-    alert("Hello, world from javascript!");
-}
-// This function will be called when the link is clicked
-// It shows an alert with a message
-// Ensure the DOM is fully loaded before attaching the event listener
-document.addEventListener("DOMContentLoaded", function() {
-    const link = document.getElementById("hello-link");
-    if (!link) {
-        console.error("Link with ID 'hello-link' not found.");
-        return;
+const button = document.getElementById("myButton");
+var r = document.querySelector(':root');
+var darkMode = false 
+
+button.addEventListener("click", () => {
+    if(!darkMode) {
+        r.style.setProperty('--header1', '#bbb');
+        r.style.setProperty('--fancy-text', '#000');
+        r.style.setProperty('--offer-border', '#333');
+        r.style.setProperty('--offer-bg', '#060606');
+        r.style.setProperty('--table-border', '#0e0e0e');
+        r.style.setProperty('--th-color', '#999');
+        r.style.setProperty('--button-gradient-end', '#444');
+        r.style.setProperty('--button-hover-border', '#555');
+        darkMode = true;
+    }else {
+        r.style.setProperty('--header1', '#444');
+        r.style.setProperty('--fancy-text', '#fff');
+        r.style.setProperty('--offer-border', '#ccc');
+        r.style.setProperty('--offer-bg', '#fafafa');
+        r.style.setProperty('--table-border', '#f1f1f1');
+        r.style.setProperty('--th-color', '#777');
+        r.style.setProperty('--button-gradient-end', '#bbb');
+        r.style.setProperty('--button-hover-border', '#aaa');
+        darkMode = false;
     }
-    link.addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        sayHello();
-    });
-});
-
-async function getRandomJoke() {
-    return fetch('https://icanhazdadjoke.com/', {
-        headers: {
-            'Accept': 'text/plain'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .catch(error => {
-        console.error('There was a problem fetching the joke:', error);
-        return "Failed to fetch a joke. Please try again later.";
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const jokeButton = document.getElementById("joke-button");
-    if (!jokeButton) {
-        console.error("Button with ID 'joke-button' not found.");
-        return;
-    }
-    jokeButton.addEventListener("click", async function() {
-
-            const jokeDisplay = document.getElementById("joke-display");
-            if (!jokeDisplay) {
-                console.error("Element with ID 'joke-display' not found.");
-                return;
-            }
-            jokeDisplay.textContent = "Loading joke...";
-            const joke = await getRandomJoke();
-            jokeDisplay.textContent = joke;
-    });
-});
+})
